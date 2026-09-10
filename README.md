@@ -90,16 +90,22 @@ GEMINI_API_KEYS=
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/ayush0chaudhary/blurr.git](https://github.com/ayush0chaudhary/blurr.git)
-    cd blurr
+    git clone https://github.com/himanshumeena671-code/himanshu-panda-ai.git
+    cd himanshu-panda-ai
+    cp local.properties.template local.properties
     ```
 
-2.  **Build & Run:**
+2. **Configure `local.properties`:**
+   - Add `sdk.dir` for your Android SDK path.
+   - Add at least one key in `GEMINI_API_KEYS`.
+   - Leave optional keys empty if you only want a personal Gemini-powered APK.
+
+3.  **Build & Run:**
     * Open the project in Android Studio.
     * Let Gradle sync all the dependencies.
     * Run the app on your selected device or emulator.
 
-3.  **Enable Accessibility Service:**
+4.  **Enable Accessibility Service:**
     * On the first run, the app will prompt you to grant Accessibility permission.
     * Click "Grant Access" and enable the "Panda" service in your phone's settings. This is required for the agent to see and control the screen.
 
