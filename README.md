@@ -132,3 +132,4 @@ adb logcat | grep GeminiApi
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Ayush0Chaudhary/blurr&type=Timeline)](https://www.star-history.com/#Ayush0Chaudhary/blurr&Timeline)
+Trigger fresh rebuild
