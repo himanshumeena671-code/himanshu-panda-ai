@@ -9,7 +9,7 @@ plugins {
     id("com.google.gms.google-services")
     alias(libs.plugins.ksp)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
-    id("com.google.firebase.crashlytics")
+    // id("com.google.firebase.crashlytics")
 
 }
 
