@@ -141,23 +141,14 @@ dependencies {
     // Room database dependencies
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
-    // Import the Firebase BoM
-    implementation(platform(libs.firebase.bom))
-
-    implementation(libs.firebase.config)
-
-
-    // Add the dependency for the Firebase Authentication library
-    implementation(libs.firebase.auth)
-
-    // Add the dependency for the Google Play services library
-    implementation(libs.play.services.auth)
-
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-crashlytics-ndk")
-    implementation("com.google.firebase:firebase-functions")
-    implementation(libs.firebase.firestore)
+    // implementation("com.google.firebase:firebase-analytics")
+        // implementation(platform(libs.firebase.bom))
+        // implementation(libs.firebase.config)
+        // implementation(libs.firebase.auth)
+        // implementation("com.google.firebase:firebase-analytics")
+        // implementation("com.google.firebase:firebase-crashlytics-ndk")
+        // implementation("com.google.firebase:firebase-functions")
+        // implementation(libs.firebase.firestore)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.android.billingclient:billing-ktx:7.0.0")
 }
