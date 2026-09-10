@@ -24,16 +24,11 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug APK with full output
-      run: ./gradlew assembleDebug --stacktrace --info --scan
-      continue-on-error: true
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --no-daemon
 
-    - name: Find and Print Build Errors
-      run: |
-        find app/build -name "*.log" -o -name "build.txt" | while read file; do
-          echo "=== $file ==="
-          cat "$file"
-        done
-        find . -name "hs_err_pid*.log" | while read file; do
-          cat "$file"
-        done
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Himanshu-Panda-Debug-APK
+        path: app/build/outputs/apk/debug/app-debug.apk
