@@ -119,9 +119,11 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } catch (e: ApiException) {
                         Log.w("LoginActivity", "Google sign in failed", e)
-                        // FirebaseCrashlytics.getInstance().recordException(e)
-                        // FirebaseCrashlytics.getInstance()
-                            .log("Google Sign-In failed in credential extraction with ApiException")
+                        Log.e(
+                            "LoginActivity",
+                            "Google Sign-In failed in credential extraction with ApiException",
+                            e
+                        )
                         Toast.makeText(this, "Google Sign-In failed.", Toast.LENGTH_SHORT).show()
                         progressBar.visibility = View.GONE
                         loadingText.visibility = View.GONE
@@ -190,7 +192,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Default assumption: treat as existing unless backend explicitly says otherwise
                     var userExists = true
-                    val resultData = task.result?.data
+                    val resultData = task.result?.getData()
                     if (resultData is Map<*, *>) {
                         val existsFlag = (resultData["userExists"] as? Boolean)
                         if (existsFlag != null) userExists = existsFlag
@@ -260,7 +262,7 @@ class LoginActivity : AppCompatActivity() {
             .call(data)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val result = task.result?.data as? Map<*, *>
+                    val result = task.result?.getData() as? Map<*, *>
                     val customToken = result?.get("token") as? String
                     if (customToken != null) {
                         signInWithCustomToken(customToken)
@@ -377,9 +379,7 @@ class LoginActivity : AppCompatActivity() {
                     googleSignInLauncher.launch(intentSenderRequest)
                 } catch (e: Exception) {
                     Log.e("LoginActivity", "Couldn't start One Tap UI: ${e.localizedMessage}", e)
-                    // FirebaseCrashlytics.getInstance().recordException(e)
-                    // FirebaseCrashlytics.getInstance()
-                        .log("Failed to start One Tap UI: ${e.localizedMessage}")
+                    Log.e("LoginActivity", "Failed to start One Tap UI: ${e.localizedMessage}", e)
                     Toast.makeText(
                         this,
                         "Sign-in UI failed to start: ${e.localizedMessage}",
@@ -392,9 +392,6 @@ class LoginActivity : AppCompatActivity() {
             }
             .addOnFailureListener(this) { e ->
                 Log.e("LoginActivity", "Sign-in failed: ${e.localizedMessage}", e)
-                FirebaseCrashlytics.getInstance().recordException(e)
-                FirebaseCrashlytics.getInstance()
-                    .log("Google One Tap sign-in failed: ${e.localizedMessage}")
                 Toast.makeText(this, "Sign-in failed: ${e.localizedMessage}", Toast.LENGTH_LONG)
                     .show()
                 progressBar.visibility = View.GONE
@@ -496,9 +493,11 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Log.w("LoginActivity", "signInWithCredential:failure", task.exception)
                     task.exception?.let { exception ->
-                        // FirebaseCrashlytics.getInstance().recordException(exception)
-                        // FirebaseCrashlytics.getInstance()
-                            .log("Firebase authentication failed: ${exception.localizedMessage}")
+                        Log.e(
+                            "LoginActivity",
+                            "Firebase authentication failed: ${exception.localizedMessage}",
+                            exception
+                        )
                     }
                     Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_SHORT).show()
                 }
