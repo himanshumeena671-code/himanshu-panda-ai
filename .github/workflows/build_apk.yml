@@ -24,13 +24,5 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug --stacktrace --no-daemon
-      env:
-        CI: true
-
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Himanshu-Panda-Debug-APK
-        path: app/build/outputs/apk/debug/app-debug.apk
+    - name: Build Debug APK with full debug stacktrace
+      run: ./gradlew assembleDebug --stacktrace --info --no-daemon
