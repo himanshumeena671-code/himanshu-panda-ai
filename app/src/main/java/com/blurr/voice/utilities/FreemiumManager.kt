@@ -37,19 +37,7 @@ class FreemiumManager {
         }
     }
     suspend fun isUserSubscribed(): Boolean {
-        val currentUser = auth.currentUser ?: return false // If not logged in, not pro
-        return try {
-            val document = db.collection("users").document(currentUser.uid).get().await()
-            if (document.exists()) {
-                val plan = document.getString("plan")
-                plan == "pro"
-            } else {
-                false // Document doesn't exist, so user can't be pro
-            }
-        } catch (e: Exception) {
-            Logger.e("FreemiumManager", "Error checking user plan from Firestore", e)
-            false // In case of error, default to not pro
-        }
+        return true // BYPASSED: Always Pro!
     }
 
 
@@ -87,18 +75,7 @@ class FreemiumManager {
     }
 
     suspend fun canPerformTask(): Boolean {
-        if (isUserSubscribed()) return true
-        val currentUser = auth.currentUser ?: return false
-
-        return try {
-            val document = db.collection("users").document(currentUser.uid).get().await()
-            val tasksRemaining = document.getLong("tasksRemaining") ?: 0
-            Logger.d("FreemiumManager", "User has $tasksRemaining tasks remaining today.")
-            tasksRemaining > 0
-        } catch (e: Exception) {
-            Logger.e("FreemiumManager", "Error fetching user task count", e)
-            false
-        }
+        return true // BYPASSED: Unlimited tasks!
     }
 
     suspend fun decrementTaskCount() {
