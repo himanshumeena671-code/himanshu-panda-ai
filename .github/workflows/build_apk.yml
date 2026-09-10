@@ -24,5 +24,16 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug APK with full debug output
-      run: ./gradlew assembleDebug --info --stacktrace --no-daemon
+    - name: Build Debug APK with full output
+      run: ./gradlew assembleDebug --stacktrace --info --scan
+      continue-on-error: true
+
+    - name: Find and Print Build Errors
+      run: |
+        find app/build -name "*.log" -o -name "build.txt" | while read file; do
+          echo "=== $file ==="
+          cat "$file"
+        done
+        find . -name "hs_err_pid*.log" | while read file; do
+          cat "$file"
+        done
