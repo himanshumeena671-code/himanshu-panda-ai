@@ -60,7 +60,7 @@ android {
         buildConfigField("String", "TAVILY_API", "\"$tavilyApiKeys\"")
         buildConfigField("String", "MEM0_API", "\"$mem0ApiKey\"")
         buildConfigField("String", "PICOVOICE_ACCESS_KEY", "\"$picovoiceApiKey\"")
-        buildConfigField("boolean", "ENABLE_DIRECT_APP_OPENING", "true")
+        buildConfigField("boolean", "ENABLE_DIRECT_APP_OPENING", "false")
         buildConfigField("boolean", "SPEAK_INSTRUCTIONS", "true")
         buildConfigField("String", "GOOGLE_TTS_API_KEY", "\"$googleTtsApiKey\"")
         buildConfigField(
@@ -136,20 +136,19 @@ dependencies {
     // Porcupine Wake Word Engine
     implementation("ai.picovoice:porcupine-android:3.0.2")
 
+    // Firebase BOM + dependencies
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-config")
+    implementation("com.google.firebase:firebase-functions")
+    implementation("com.google.firebase:firebase-crashlytics-ndk")
+    implementation("com.google.android.gms:play-services-auth:21.3.0")
 
     // Room database dependencies
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-        // implementation("com.google.firebase:firebase-analytics")
-        implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
-        implementation("com.google.firebase:firebase-analytics")
-        implementation("com.google.firebase:firebase-auth")
-        implementation("com.google.firebase:firebase-firestore")
-        implementation("com.google.firebase:firebase-config")
-        implementation("com.google.firebase:firebase-functions")
-        implementation("com.google.firebase:firebase-crashlytics-ndk")
-        implementation("com.google.android.gms:play-services-auth:21.3.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.android.billingclient:billing-ktx:7.0.0")
 }
