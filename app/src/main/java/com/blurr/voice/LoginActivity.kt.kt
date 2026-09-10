@@ -29,7 +29,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+// import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.functions.functions
@@ -119,8 +119,8 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } catch (e: ApiException) {
                         Log.w("LoginActivity", "Google sign in failed", e)
-                        FirebaseCrashlytics.getInstance().recordException(e)
-                        FirebaseCrashlytics.getInstance()
+                        // FirebaseCrashlytics.getInstance().recordException(e)
+                        // FirebaseCrashlytics.getInstance()
                             .log("Google Sign-In failed in credential extraction with ApiException")
                         Toast.makeText(this, "Google Sign-In failed.", Toast.LENGTH_SHORT).show()
                         progressBar.visibility = View.GONE
@@ -377,8 +377,8 @@ class LoginActivity : AppCompatActivity() {
                     googleSignInLauncher.launch(intentSenderRequest)
                 } catch (e: Exception) {
                     Log.e("LoginActivity", "Couldn't start One Tap UI: ${e.localizedMessage}", e)
-                    FirebaseCrashlytics.getInstance().recordException(e)
-                    FirebaseCrashlytics.getInstance()
+                    // FirebaseCrashlytics.getInstance().recordException(e)
+                    // FirebaseCrashlytics.getInstance()
                         .log("Failed to start One Tap UI: ${e.localizedMessage}")
                     Toast.makeText(
                         this,
@@ -496,8 +496,8 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Log.w("LoginActivity", "signInWithCredential:failure", task.exception)
                     task.exception?.let { exception ->
-                        FirebaseCrashlytics.getInstance().recordException(exception)
-                        FirebaseCrashlytics.getInstance()
+                        // FirebaseCrashlytics.getInstance().recordException(exception)
+                        // FirebaseCrashlytics.getInstance()
                             .log("Firebase authentication failed: ${exception.localizedMessage}")
                     }
                     Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_SHORT).show()
