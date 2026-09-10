@@ -24,5 +24,8 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug APK without daemon
-      run: ./gradlew assembleDebug --no-daemon --stacktrace
+    - name: Clean project
+      run: ./gradlew clean --no-daemon
+
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --no-daemon --info
