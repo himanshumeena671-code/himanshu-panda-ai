@@ -15,7 +15,7 @@ jobs:
       run: |
         yes | sdkmanager --licenses || true
     - name: Build with Gradle
-      run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
+      run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon --refresh-dependencies
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
