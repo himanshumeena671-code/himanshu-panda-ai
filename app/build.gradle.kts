@@ -9,7 +9,7 @@ plugins {
     id("com.google.gms.google-services")
     alias(libs.plugins.ksp)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
-    // id("com.google.firebase.crashlytics")
+    id("com.google.firebase.crashlytics")
 
 }
 
@@ -77,8 +77,11 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            isShrinkResources = false
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled = true
+            }
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -141,15 +144,23 @@ dependencies {
     // Room database dependencies
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-        // implementation("com.google.firebase:firebase-analytics")
-        implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
-        implementation("com.google.firebase:firebase-analytics")
-        implementation("com.google.firebase:firebase-auth")
-        implementation("com.google.firebase:firebase-firestore")
-        implementation("com.google.firebase:firebase-config")
-        implementation("com.google.firebase:firebase-functions")
-        implementation("com.google.firebase:firebase-crashlytics-ndk")
-        implementation("com.google.android.gms:play-services-auth:21.3.0")
+    ksp("androidx.room:room-compiler:2.6.1")
+    // Import the Firebase BoM
+    implementation(platform(libs.firebase.bom))
+
+    implementation(libs.firebase.config)
+
+
+    // Add the dependency for the Firebase Authentication library
+    implementation(libs.firebase.auth)
+
+    // Add the dependency for the Google Play services library
+    implementation(libs.play.services.auth)
+
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics-ndk")
+    implementation("com.google.firebase:firebase-functions")
+    implementation(libs.firebase.firestore)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.android.billingclient:billing-ktx:7.0.0")
 }

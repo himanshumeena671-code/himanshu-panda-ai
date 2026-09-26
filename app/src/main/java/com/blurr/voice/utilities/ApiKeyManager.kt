@@ -9,7 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 object ApiKeyManager {
 
-    private val apiKeys: List<String> = listOf("AIzaSyDummyKeyForHimanshuAppNoProxyNeeded123456789")
+    private val apiKeys: List<String> = if (BuildConfig.GEMINI_API_KEYS.isNotEmpty()) {
+        BuildConfig.GEMINI_API_KEYS.split(",")
+    } else {
+        emptyList()
+    }
 
     private val currentIndex = AtomicInteger(0)
 
