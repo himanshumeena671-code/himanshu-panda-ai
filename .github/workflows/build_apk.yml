@@ -20,12 +20,17 @@ jobs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
+      with:
+        cmdline-tools-version: 11076708 # Use a known stable version
+
+    - name: Accept Licenses
+      run: yes | sdkmanager --licenses > /dev/null || true
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Debug APK with full debug output
-      run: ./gradlew assembleDebug --stacktrace --info --no-daemon
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --no-daemon
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
