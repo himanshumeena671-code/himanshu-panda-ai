@@ -41,19 +41,19 @@ class MyApplication : Application(), PurchasesUpdatedListener {
         super.onCreate()
         appContext = applicationContext
 
-        // Initialize Firebase Remote Config
-        val remoteConfig = Firebase.remoteConfig
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) 1L else 3L
-        }
-        remoteConfig.setConfigSettingsAsync(configSettings)
-        remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
-
+        // Initialize Firebase Remote Config (BYPASSED)
+        // val remoteConfig = Firebase.remoteConfig
+        // val configSettings = remoteConfigSettings {
+        //     minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) 1L else 3L
+        // }
+        // remoteConfig.setConfigSettingsAsync(configSettings)
+        // remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
 
         billingClient = BillingClient.newBuilder(this)
             .setListener(this)
             .enablePendingPurchases()
             .build()
+
 
         connectToBillingService()
 
