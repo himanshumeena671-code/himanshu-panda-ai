@@ -40,9 +40,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // AUTO-BYPASS LOGIN: Straight to main activity
+        // Ensure MainActivity is launched and LoginActivity is finished
         Log.d("LoginActivity", "Bypassing login flow for unlocked build.")
-        startActivity(Intent(this, MainActivity::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         finish()
     }
 }
